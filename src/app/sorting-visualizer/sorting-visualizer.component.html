@@ -1,0 +1,18 @@
+<div class="action">
+  <!-- <button (click)="callSelectionSort()">Selection Sort</button>
+  <button (click)="callBubbleSort()">Bubble Sort</button>
+  <button (click)="mergeSort()">Merge Sort</button>
+  <button (click)="generatenew()">Generate new</button> -->
+  <button (click)="generatenew()">Generate</button>
+  <button (click)="test()">Test Few things</button>
+</div>
+<div class="container">
+  <div
+    *ngFor="let i of list"
+    class="array-bar"
+    [class.bg-primary]="i.active"
+    [style.height.px]="i.value"
+  >
+    {{ i.value }}
+  </div>
+</div>
