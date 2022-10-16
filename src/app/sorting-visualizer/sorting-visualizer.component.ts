@@ -3,6 +3,9 @@ import { Observable, from, Observer, fromEvent, of } from 'rxjs';
 import { map, filter, delay, concatMap } from 'rxjs/operators';
 import { bubbleSort } from 'src/Algo/BubbleSort';
 import { insertionSort } from 'src/Algo/InsertionSort';
+import { MergeSort } from 'src/Algo/MergeSort';
+import { quickSort } from 'src/Algo/QuickSort';
+import { randomIntFromInterval } from 'src/Algo/randomIntFromInterval';
 import { SortItem } from 'src/Model/SortItem';
 @Component({
   selector: 'app-sorting-visualizer',
@@ -54,13 +57,9 @@ export class SortingVisualizerComponent implements OnInit {
 
   test() {
     //bubbleSort(this.list, 50);
-    insertionSort(this.list, 50);
+    //MergeSort(this.list, 50);
+    quickSort(this.list, 500);
   }
-}
-
-function randomIntFromInterval(min: number, max: number) {
-  // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 class myObserver implements Observer<number> {
