@@ -16,9 +16,27 @@ div {
 }
 
 .min-idx {
-    background-color: yellow !important;
+    background-color: yellow;
 }
 
 .bg-primary {
-    background-color: red !important;
+    background-color: red;
 }
+
+.bg-smallest {
+    background-color: greenyellow;
+}
+
+.bg-pivot {
+    background-color: greenyellow;
+}
+
+.bg-swapping {
+    background-color: purple;
+}
+
+
+.bg-sorted {
+    background-color: lightgreen;
+}
+

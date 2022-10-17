@@ -44,7 +44,7 @@ export class SortingVisualizerComponent implements OnInit {
     for (let i = 0; i < 20; i++) {
       this.arrayBars[i].style.backgroundColor = 'aqua';
     } */
-    this.list = Array(10)
+    this.list = Array(20)
       .fill(null)
       .map(() => ({
         value: randomIntFromInterval(100, 400),
@@ -52,13 +52,16 @@ export class SortingVisualizerComponent implements OnInit {
         finalrun: false,
         swapping: false,
         pivot: false,
+        smallest: false,
+        sorted: false,
       }));
   }
 
   test() {
+    //insertionSort(this.list, 50);
     //bubbleSort(this.list, 50);
     //MergeSort(this.list, 50);
-    quickSort(this.list, 500);
+    quickSort(this.list, 50);
   }
 }
 

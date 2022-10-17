@@ -10,8 +10,12 @@
   <div
     *ngFor="let i of list"
     class="array-bar"
-    [class.bg-primary]="i.active"
     [style.height.px]="i.value"
+    [class.bg-primary]="i.active"
+    [class.bg-smallest]="i.smallest"
+    [class.bg-pivot]="i.pivot"
+    [class.bg-swapping]="i.swapping"
+    [class.bg-sorted]="i.sorted"
   >
     {{ i.value }}
   </div>

@@ -1,10 +1,11 @@
 import { sleep } from 'src/app/sorting-visualizer/sorting-visualizer.component';
 import { SortItem } from 'src/Model/SortItem';
 import { randomIntFromInterval } from './randomIntFromInterval';
-import { swap } from './SwapSortItem';
+import { swap, swapAsync } from './SwapSortItem';
 
 export async function quickSort(list: SortItem[], delay: number) {
-  quickSortRec(list, 0, list.length - 1, delay);
+  await quickSortRec(list, 0, list.length - 1, delay);
+  list.forEach((item) => (item.sorted = true));
 }
 
 async function quickSortRec(
@@ -33,6 +34,9 @@ async function partition(
   let pIndex = randomIntFromInterval(start, end);
 
   let pivot: SortItem = arr[pIndex];
+
+  //pivot.sorted = true;
+  await sleep(delay);
   while (start < end) {
     // skip smaller in left
     while (start < end && arr[start].value <= pivot.value) {
@@ -41,6 +45,8 @@ async function partition(
       arr[start].active = false;
       start++;
     }
+    arr[start].active = true;
+
     // skip larger in right
     while (start < end && arr[end].value >= pivot.value) {
       arr[end].active = true;
@@ -48,26 +54,35 @@ async function partition(
       arr[end].active = false;
       end--;
     }
+    arr[end].active = true;
+
     if (start < end) {
-      arr[start].active = true;
-      arr[end].active = true;
-      await sleep(delay);
-      swap(arr[start], arr[end]);
-      await sleep(delay);
-      arr[start].active = false;
-      arr[end].active = false;
+      //console.log(arr[start].value + ' ' + pivot.value);
+      //arr[start].sorted = true;
+      //arr[end].sorted = true;
+      //await sleep(delay);
+      await swapAsync(arr[start], arr[end], delay);
+      //await sleep(delay);
+      //arr[start].sorted = true;
+      //arr[end].sorted = true;
     }
+    arr[start].active = false;
+    arr[end].active = false;
   }
 
   if (arr[start].value < pivot.value) {
-    arr[start].active = true;
+    //console.log(arr[start].value + ' ' + pivot.value);
+    /*arr[start].active = true;
     arr[pIndex].active = true;
-    await sleep(delay);
-    swap(arr[pIndex], arr[start]);
-    arr[start].active = false;
+    await sleep(delay); */
+    await swapAsync(arr[pIndex], arr[start], delay);
+    /*arr[start].active = false;
     arr[pIndex].active = false;
-    await sleep(delay);
+    //await sleep(delay); */
+    //arr[start].sorted = true;
+    //arr[pIndex].sorted = true;
   }
-
+  //pivot.pivot = false;
+  pivot.sorted = true;
   return start;
 }

@@ -1,5 +1,6 @@
 import { sleep } from 'src/app/sorting-visualizer/sorting-visualizer.component';
 import { compare, SortItem } from 'src/Model/SortItem';
+import { swap } from './SwapSortItem';
 
 export async function MergeSort(list: SortItem[], delay: number) {
   let aux = Array<SortItem>(list.length);
@@ -25,6 +26,7 @@ export async function MergeSort(list: SortItem[], delay: number) {
     for (let i = lo; i <= hi; i++) {
       list[i].active = true;
       await sleep(delay);
+      list[i].active = false;
       if (j > mid) {
         list[i] = aux[k];
         k++;
@@ -38,8 +40,14 @@ export async function MergeSort(list: SortItem[], delay: number) {
         list[i] = aux[j];
         j++;
       }
-      list[i].active = false;
-      await sleep(delay);
+      list[i].sorted = true;
+      //await sleep(delay);
+    }
+
+    if (!(lo == 0 && hi == list.length - 1)) {
+      for (let i = lo; i <= hi; i++) {
+        list[i].sorted = false;
+      }
     }
   }
 }
